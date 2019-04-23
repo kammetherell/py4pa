@@ -69,7 +69,102 @@ def clean_email_data(dir, files='all', include_subject=False, engine='c', encodi
 
     return None
 
-def generate_node_edge_lists(email_data, demographic_data, demographic_key, output_dir):
+def generate_node_edge_lists(email_data, demographic_data, demographic_key, output_dir, include_subject=False):
+    """Generates Node and Edge lists from email data and saves them to csv
+
+    Parameters
+    ----------
+    email_data: List of Strings
+        List of paths to all files containing email data to be processed
+
+    demographic_data: String
+        Path to file containing all node demographic data to be added to Node list
+
+    demographic_key: String
+        Column in demographic_data that contains email address to act as join to email_data
+
+    output_dir: String
+        Path to directory to save Node and Edge lists into. Must include '/' at end.
+
+    include_subject: Boolean default = False
+        Defines whether the Subject field should be included in the email data
+
+    Returns
+    -------
+    Nothing is returned by the function, but new files are written to 'output_dir'
+    """
+    start = datetime.datetime.now()
+    print('Starting: ', str(start.hour).zfill(2) + ':'+ str(start.minute).zfill(2))
+
+    cols_to_load = ['message_id','SenderAddress','RecipientAddress','Received','Size','Status']
+    if include_subject:
+        cols_to_load.append('Subject')
+
+    df_emails = pd.DataFrame(columns=cols_to_load)
+
+    #Loading in email meta-data
+    now = datetime.datetime.now()
+    print('Loading in email data: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
+
+    for file in email_data:
+        df_temp = pd.read_csv(file, usecols=cols_to_load)
+        df_emails = df_emails.append(df_temp, sort=True)
+
+    now = datetime.datetime.now()
+    print('Email data loaded: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
+
+    #Loading in demographic data
+    df_demographics = pd.read_csv(demographic_data, encoding='Latin')
+    now = datetime.datetime.now()
+    print('Demographic data loaded: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
+
+    #Cleaning up data-sets
+    df_emails['RecipientAddress'] = df_emails['RecipientAddress'].str.lower()
+    df_emails['SenderAddress'] = df_emails['SenderAddress'].str.lower()
+    df_demographics[demographic_key] = df_demographics[demographic_key].str.lower()
+    df_demographics = df_demographics.drop_duplicates(demographic_key).set_index(demographic_key)
+
+    #Prepare Node List
+    now = datetime.datetime.now()
+    print('Node list preparation started: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
+
+    ## Generate list of unique emails
+    unique_emails = list(df_emails['RecipientAddress'].unique())
+    for idx, email in enumerate(df_emails['SenderAddress'].unique()):
+        if email not in unique_emails:
+            unique_emails.append(email)
+
+    node_list = []
+    for idx, email in enumerate(unique_emails):
+        node = {
+            'email': email
+        }
+        node_list.append(node)
+
+    df_nodes = pd.DataFrame(node_list)
+
+    for attr in list(df_demographics.columns):
+        df_nodes[attr] = df_nodes['email'].map(df_demographics[attr])
+
+    #Prepare Edge List
+    now = datetime.datetime.now()
+    print('Edge list preparation started: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
+    df_edges = pd.DataFrame({'weight': df_emails.groupby(['SenderAddress','RecipientAddress']).size()}).reset_index()
+
+    #Save Lists to csv
+    now = datetime.datetime.now()
+    print('Saving Node and Edge lists: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
+    fName_date = str(now.year) + str(now.month).zfill(2) + str(now.day).zfill(2) + "_" + str(now.hour).zfill(2) + str(now.minute).zfill(2)
+    nodelist_fName = 'nodeList_'+ fName_date + '.csv'
+    edgelist_fName = 'edgeList_'+ fName_date + '.csv'
+
+    df_nodes.to_csv(output_dir+nodelist_fName, index=False)
+    df_edges.to_csv(output_dir+edgelist_fName, index=False)
+
+    now = datetime.datetime.now()
+    print('Node and Edge list preparation complete: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
+    print('Node List: ', nodelist_fName)
+    print('Edge List: ', edgelist_fName)
 
     return None
 
