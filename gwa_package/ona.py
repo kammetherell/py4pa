@@ -69,6 +69,10 @@ def clean_email_data(dir, files='all', include_subject=False, engine='c', encodi
 
     return None
 
+def generate_node_edge_lists(email_data, demographic_data, demographic_key, output_dir):
+
+    return None
+
 
 def _get_density(df_nodes, row, target_attribute):
     if row['sender_group'] == row['recipient_group']:

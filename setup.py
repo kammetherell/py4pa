@@ -11,7 +11,6 @@ setup(name='gwa_package',
     install_requires=[
         'pandas',
         'numpy',
-        'os',
         'datetime'
     ],
     zip_safe=False)
