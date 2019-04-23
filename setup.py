@@ -20,6 +20,7 @@ setup(name='gwa_package',
         'pandas',
         'numpy',
         'datetime',
-        'networkx'
+        'networkx',
+        'csv'
     ],
     zip_safe=False)
