@@ -184,10 +184,10 @@ def generate_nx_digraph(node_list, edge_list):
 
     Parameters
     ----------
-    node_list: String
-        Path to file containing Node list
+    node_list: String or Pandas Dataframe
+        Path to file containing Node list, or Dataframe of Node List
 
-    edge_list: String
+    edge_list: String  or Pandas Dataframe
         Path to file containing Edge list
 
     Returns
@@ -209,6 +209,13 @@ def generate_nx_digraph(node_list, edge_list):
     node_names = [n[0] for n in nodes]
     G.add_nodes_from(node_names)
 
+    for idx, attr in enumerate(node_attrs[1:], 1):
+        temp_dict = {}
+        for node in nodes:
+            temp_dict[node[0]] = node[idx]
+
+        nx.set_node_attributes(G, temp_dict, attr)
+
     # Read in the edgelist file
     print('Node list loaded; Reading in Edge list')
     with open(edge_list, 'r') as edgecsv:
@@ -216,14 +223,6 @@ def generate_nx_digraph(node_list, edge_list):
         edges = [tuple(e[0:]) for e in edgereader][1:]
 
     G.add_weighted_edges_from(edges)
-
-    print('Edge list loaded; Adding node attributes')
-    for idx, attr in enumerate(node_attrs[1:], 1):
-        temp_dict = {}
-        for node in nodes:
-            temp_dict[node[0]] = node[idx]
-
-        nx.set_node_attributes(G, temp_dict, attr)
 
     print('NetworkX Graph generated')
 
@@ -265,8 +264,6 @@ def calc_density(df_nodes, df_edges, target_attribute):
     df_edges['recipient_group'] = df_edges['RecipientAddress'].map(df_nodes.set_index('email')[target_attribute])
 
     df_densities = pd.DataFrame({'num_edges': df_edges.groupby(['sender_group','recipient_group'])['weight'].agg('count')}).reset_index()
-
-    print(df_densities.head())
 
     df_densities['density'] = df_densities.apply(lambda row: _get_density(df_nodes, row, target_attribute), axis=1)
 
