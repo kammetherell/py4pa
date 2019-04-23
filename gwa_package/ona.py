@@ -91,7 +91,11 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
 
     Returns
     -------
-    Nothing is returned by the function, but new files are written to 'output_dir'
+    nodeList_fPath: String
+        Path to the Node List generated
+
+    edgeList_fPath: String
+        Path to the Edge List generated
     """
     start = datetime.datetime.now()
     print('Starting: ', str(start.hour).zfill(2) + ':'+ str(start.minute).zfill(2))
@@ -155,18 +159,22 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
     now = datetime.datetime.now()
     print('Saving Node and Edge lists: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
     fName_date = str(now.year) + str(now.month).zfill(2) + str(now.day).zfill(2) + "_" + str(now.hour).zfill(2) + str(now.minute).zfill(2)
-    nodelist_fName = 'nodeList_'+ fName_date + '.csv'
-    edgelist_fName = 'edgeList_'+ fName_date + '.csv'
 
-    df_nodes.to_csv(output_dir+nodelist_fName, index=False)
-    df_edges.to_csv(output_dir+edgelist_fName, index=False)
+    nodeList_fName = 'nodeList_'+ fName_date + '.csv'
+    nodeList_fPath = output_dir + nodeList_fName
+
+    edgelist_fName = 'edgeList_'+ fName_date + '.csv'
+    edgeList_fPath = output_dir + edgeList_fName
+
+    df_nodes.to_csv(nodeList_fPath, index=False)
+    df_edges.to_csv(edgeList_fPath, index=False)
 
     now = datetime.datetime.now()
     print('Node and Edge list preparation complete: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
     print('Node List: ', nodelist_fName)
     print('Edge List: ', edgelist_fName)
 
-    return None
+    return nodeList_fPath, edgeList_fPath
 
 
 def _get_density(df_nodes, row, target_attribute):
