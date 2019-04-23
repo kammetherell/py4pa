@@ -211,7 +211,7 @@ def generate_nx_digraph(node_list, edge_list):
 
     # Read in the edgelist file
     print('Node list loaded; Reading in Edge list')
-    with open(path_to_edge_list, 'r') as edgecsv:
+    with open(edge_list, 'r') as edgecsv:
         edgereader = csv.reader(edgecsv)
         edges = [tuple(e[0:]) for e in edgereader][1:]
 
