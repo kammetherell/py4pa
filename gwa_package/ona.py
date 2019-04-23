@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import networkx as nx
 import datetime
 import os
 
@@ -175,6 +176,57 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
     print('Edge List: ', edgelist_fName)
 
     return nodeList_fPath, edgeList_fPath
+
+
+def generate_nx_digraph(node_list, edge_list):
+    """Generates NetworkX DiGraph object
+
+    Parameters
+    ----------
+    node_list: String
+        Path to file containing Node list
+
+    edge_list: String
+        Path to file containing Edge list
+
+    Returns
+    -------
+    G: NetworkX DiGraph
+        NetworkX DiGraph object
+    """
+    # Create our graph - directed = DiGraph
+    G = nx.DiGraph()
+
+    # Read in Node List
+    print('Reading in Node list')
+    with open(node_list, 'r') as nodecsv:
+        nodereader = csv.reader(nodecsv)
+        node_list = [n for n in nodereader]
+        node_attrs = node_list[:1][0]
+        nodes = node_list[1:]
+
+    node_names = [n[0] for n in nodes]
+    G.add_nodes_from(node_names)
+
+    # Read in the edgelist file
+    print('Node list loaded; Reading in Edge list')
+    with open(path_to_edge_list, 'r') as edgecsv:
+        edgereader = csv.reader(edgecsv)
+        edges = [tuple(e[0:]) for e in edgereader][1:]
+
+    G.add_weighted_edges_from(edges)
+
+    print('Edge list loaded; Adding node attributes')
+    for idx, attr in enumerate(node_attrs[1:], 1):
+        temp_dict = {}
+        for node in nodes:
+            temp_dict[node[0]] = node[idx]
+
+        nx.set_node_attributes(G, temp_dict, attr)
+
+    print('NetworkX Graph generated')
+
+    return G
 
 
 def _get_density(df_nodes, row, target_attribute):
