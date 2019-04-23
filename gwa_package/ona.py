@@ -260,6 +260,9 @@ def calc_density(df_nodes, df_edges, target_attribute):
     Pandas DataFrame containing the densities, grouped by the target_attribute values
     """
 
+    df_edges = df_edges.copy()
+    df_nodes = df_nodes.copy()
+
     df_edges['sender_group'] = df_edges['SenderAddress'].map(df_nodes.set_index('email')[target_attribute])
     df_edges['recipient_group'] = df_edges['RecipientAddress'].map(df_nodes.set_index('email')[target_attribute])
 
@@ -326,6 +329,9 @@ def calc_modularity(df_nodes, df_edges, target_attribute, weighted=False, direct
     else:
         source_group = 'recipient_group'
         end_group = 'sender_group'
+
+    df_edges = df_edges.copy()
+    df_nodes = df_nodes.copy()
 
     df_edges['sender_group'] = df_edges['SenderAddress'].map(df_nodes.set_index('email')[target_attribute])
     df_edges['recipient_group'] = df_edges['RecipientAddress'].map(df_nodes.set_index('email')[target_attribute])
