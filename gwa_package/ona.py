@@ -138,7 +138,7 @@ def _get_modularity(df_edges, row, target_attribute, weighted, source):
         return np.nan
 
 
-def calc_modularity(df_nodes, df_edges, target_attribute, weighted=False, source='sender'):
+def calc_modularity(df_nodes, df_edges, target_attribute, weighted=False, direction='outbound'):
     """Calculates the Modularity of connections originating from groups in a specific target target_attribute
 
     Parameters
@@ -152,11 +152,18 @@ def calc_modularity(df_nodes, df_edges, target_attribute, weighted=False, source
     target_attribute: String
         Name of attribute in Node List that we want to calculate the modularities between
 
+    weighted: Boolean default False
+        If set to True, the modularities will be weighted by the amount of email traffic.
+        If False, will just calculate on basis on presence of a connection
+
+    direction: String default = 'outbound'
+        'outbound' or 'inbound' determines the direction of the email traffic to be considered
+
     Returns
     ----------
     Pandas DataFrame containing the modularities, grouped by the target_attribute values
     """
-    if source == 'sender':
+    if direction == 'outbound':
         source_group = 'sender_group'
         end_group = 'recipient_group'
     else:
