@@ -15,7 +15,8 @@ def clean_email_data(dir, files='all', include_subject=False, engine='c', encodi
         Path to the root directory containing the data files to process
 
     file: List or 'all' (optional)
-        List containing all files to be processed within the directory. If 'all' passed, then all CSV files in the directory will be processed
+        List containing all files to be processed within the directory. If 'all'
+        passed, then all CSV files in the directory will be processed
 
     include_subject: Boolean default = False
         Defines whether the Subject field should be included in the cleaned data
@@ -31,10 +32,13 @@ def clean_email_data(dir, files='all', include_subject=False, engine='c', encodi
 
     Returns
     -------
-    Nothing is returned by the function, but new files are written to 'dir' that have been cleaned
+    Nothing is returned by the function, but new files are written to 'dir' that
+    have been cleaned
     """
     start = datetime.datetime.now()
-    print('Starting: ', str(start.hour).zfill(2) + ':'+ str(start.minute).zfill(2))
+    print(
+        'Starting: ', str(start.hour).zfill(2) + ':'+ str(start.minute).zfill(2)
+    )
 
     if files == 'all':
         files_to_process =  [f for f in os.listdir(dir) if f.endswith('.csv')]
@@ -44,7 +48,14 @@ def clean_email_data(dir, files='all', include_subject=False, engine='c', encodi
     num_files = len(files_to_process)
     print(f'{num_files} to process')
 
-    cols_to_load = ['message_id','SenderAddress','RecipientAddress','Received','Size','Status']
+    cols_to_load = [
+        'message_id',
+        'SenderAddress',
+        'RecipientAddress',
+        'Received',
+        'Size',
+        'Status'
+    ]
 
     if include_subject:
         cols_to_load.append('Subject')
@@ -67,7 +78,10 @@ def clean_email_data(dir, files='all', include_subject=False, engine='c', encodi
             os.unlink(path)
 
         finish = datetime.datetime.now()
-        print(f'File {idx+1}/{num_files}: {file} finished at: {str(finish.hour).zfill(2)}:{str(finish.minute).zfill(2)}')
+        print(
+            f'File {idx+1}/{num_files}: {file} finished at: '
+            '{str(finish.hour).zfill(2)}:{str(finish.minute).zfill(2)}'
+        )
 
     return None
 
@@ -80,13 +94,16 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
         List of paths to all files containing email data to be processed
 
     demographic_data: String
-        Path to file containing all node demographic data to be added to Node list
+        Path to file containing all node demographic data to be added to Node
+        list
 
     demographic_key: String
-        Column in demographic_data that contains email address to act as join to email_data
+        Column in demographic_data that contains email address to act as join
+        to email_data
 
     output_dir: String
-        Path to directory to save Node and Edge lists into. Must include '/' at end.
+        Path to directory to save Node and Edge lists into. Must include '/'
+        at end.
 
     include_subject: Boolean default = False
         Defines whether the Subject field should be included in the email data
@@ -102,7 +119,15 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
     start = datetime.datetime.now()
     print('Starting: ', str(start.hour).zfill(2) + ':'+ str(start.minute).zfill(2))
 
-    cols_to_load = ['message_id','SenderAddress','RecipientAddress','Received','Size','Status']
+    cols_to_load = [
+        'message_id',
+        'SenderAddress',
+        'RecipientAddress',
+        'Received',
+        'Size',
+        'Status'
+    ]
+
     if include_subject:
         cols_to_load.append('Subject')
 
@@ -110,7 +135,10 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
 
     #Loading in email meta-data
     now = datetime.datetime.now()
-    print('Loading in email data: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
+    print(
+        'Loading in email data: ',
+        str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2)
+    )
 
     for file in email_data:
         df_temp = pd.read_csv(file, usecols=cols_to_load)
@@ -310,18 +338,22 @@ def calc_modularity(df_nodes, df_edges, target_attribute, weighted=False, direct
         DataFrame containing the edge list
 
     target_attribute: String
-        Name of attribute in Node List that we want to calculate the modularities between
+        Name of attribute in Node List that we want to calculate the
+        modularities between
 
     weighted: Boolean default False
-        If set to True, the modularities will be weighted by the amount of email traffic.
+        If set to True, the modularities will be weighted by the amount of
+        email traffic.
         If False, will just calculate on basis on presence of a connection
 
     direction: String default = 'outbound'
-        'outbound' or 'inbound' determines the direction of the email traffic to be considered
+        'outbound' or 'inbound' determines the direction of the email traffic
+        to be considered
 
     Returns
     ----------
-    Pandas DataFrame containing the modularities, grouped by the target_attribute values
+    Pandas DataFrame containing the modularities, grouped by the
+    target_attribute values
     """
     if direction == 'outbound':
         source_group = 'sender_group'

@@ -9,7 +9,8 @@ def concat_fields(df, fields):
         DataFrame containing the source Data
 
     fields: List of Tuples
-        List of Tuples containing the pairs of fields to be combined together. Each tuple should only length 2
+        List of Tuples containing the pairs of fields to be combined together.
+        Each tuple should only length 2
 
     Returns
     -------
@@ -24,5 +25,8 @@ def concat_fields(df, fields):
             df[new_field] = df[field[0]] + '_' + df[field[1]]
             print(f'{new_field} created')
         else:
-            print(f'Field at index {idx} skipped. It is either not a tuple or not of the correct length')
+            print(
+                f'Field at index {idx} skipped. It is either not a tuple or '
+                'not of the correct length'
+            )
     return df
