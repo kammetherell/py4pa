@@ -1,3 +1,5 @@
+from multiprocessing import Pool
+import itertools
 import pandas as pd
 import numpy as np
 import networkx as nx
@@ -256,6 +258,20 @@ def generate_nx_digraph(node_list, edge_list):
 
     return G
 
+def generate_nx_digraph_pandas(nodes_df, edges_df):
+    node_file = './nodes_temp.csv'
+    edge_file = './edge_temp.csv'
+
+    nodes_df.to_csv(node_file, index=False)
+    edges_df.to_csv(edge_file, index=False)
+
+    G = generate_nx_digraph(node_file, edge_file)
+
+    os.remove(node_file)
+    os.remove(edge_file)
+
+    return G
+    
 
 def _get_density(df_nodes, row, target_attribute):
     if row['sender_group'] == row['recipient_group']:
@@ -385,3 +401,39 @@ def calc_modularity(df_nodes, df_edges, target_attribute, weighted=False, direct
     df_modularities = df_modularities[[source_group,'modularity']]
 
     return df_modularities
+
+def chunks(l, n):
+    """Divide a list of nodes `l` in `n` chunks"""
+    l_c = iter(l)
+    while 1:
+        x = tuple(itertools.islice(l_c, n))
+        if not x:
+            return
+        yield x
+
+def _betmap(G_normalized_weight_sources_tuple):
+    """Pool for multiprocess only accepts functions with one argument.
+    This function uses a tuple as its only argument. We use a named tuple for
+    python 3 compatibility, and then unpack it when we send it to
+    `betweenness_centrality_source`
+    """
+    return nx.betweenness_centrality_source(*G_normalized_weight_sources_tuple)
+
+def betweenness_centrality_parallel(G, processes=None):
+    """Parallel betweenness centrality  function"""
+    p = Pool(processes=processes)
+    node_divisor = len(p._pool) * 4
+    node_chunks = list(chunks(G.nodes(), int(G.order() / node_divisor)))
+    num_chunks = len(node_chunks)
+    bt_sc = p.map(_betmap,
+                  zip([G] * num_chunks,
+                      [True] * num_chunks,
+                      [None] * num_chunks,
+                      node_chunks))
+
+    # Reduce the partial solutions
+    bt_c = bt_sc[0]
+    for bt in bt_sc[1:]:
+        for n in bt:
+            bt_c[n] += bt[n]
+    return bt_c
