@@ -271,7 +271,7 @@ def generate_nx_digraph_pandas(nodes_df, edges_df):
     os.remove(edge_file)
 
     return G
-    
+
 
 def _get_density(df_nodes, row, target_attribute):
     if row['sender_group'] == row['recipient_group']:
@@ -315,7 +315,7 @@ def calc_density(df_nodes, df_edges, target_attribute):
     df_densities['density'] = df_densities.apply(lambda row: _get_density(df_nodes, row, target_attribute), axis=1)
 
     df_densities = df_densities[['sender_group','recipient_group','density']]
-    df_densities['density'] = round(df_densities['density']*100,2)
+    df_densities['density'] = round(df_densities['density'],2)
 
     return df_densities
 
