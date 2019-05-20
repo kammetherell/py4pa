@@ -321,7 +321,7 @@ def calc_density(df_nodes, df_edges, target_attribute):
 
 
 def _get_modularity(df_edges, row, target_attribute, weighted, source):
-    if source == 'sender':
+    if source == 'sender_group':
         source_group = 'sender_group'
         end_group = 'recipient_group'
     else:
