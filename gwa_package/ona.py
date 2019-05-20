@@ -395,7 +395,7 @@ def calc_modularity(df_nodes, df_edges, target_attribute, weighted=False, direct
             row,
             target_attribute,
             weighted,
-            source)
+            source_group)
         , axis=1)
 
     df_modularities = df_modularities[[source_group,'modularity']]
