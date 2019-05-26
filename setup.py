@@ -20,6 +20,8 @@ setup(name='gwa_package',
         'pandas',
         'numpy',
         'datetime',
-        'networkx'
+        'networkx',
+        'requests',
+        'bs4'
     ],
     zip_safe=False)

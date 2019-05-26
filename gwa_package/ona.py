@@ -420,7 +420,7 @@ def _betmap(G_normalized_weight_sources_tuple):
     return nx.betweenness_centrality_source(*G_normalized_weight_sources_tuple)
 
 def betweenness_centrality_parallel(G, processes=None):
-    """Parallel betweenness centrality  function"""
+    """Parallel betweenness centrality function"""
     p = Pool(processes=processes)
     node_divisor = len(p._pool) * 4
     node_chunks = list(chunks(G.nodes(), int(G.order() / node_divisor)))
