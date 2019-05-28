@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 def get_glassdoor_ratings():
-    base_url = url = 'https://www.glassdoor.co.uk/Reviews/Experian-Reviews-E42406'
+    base_url = 'https://www.glassdoor.co.uk/Reviews/Experian-Reviews-E42406'
     reviews = []
     today = datetime.today().strftime('%Y-%m-%d')
     headers = {
