@@ -196,7 +196,7 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
     nodeList_fPath = output_dir + nodeList_fName
 
     edgelist_fName = 'edgeList_'+ fName_date + '.csv'
-    edgeList_fPath = output_dir + edgeList_fName
+    edgeList_fPath = output_dir + edgelist_fName
 
     df_nodes.to_csv(nodeList_fPath, index=False)
     df_edges.to_csv(edgeList_fPath, index=False)
@@ -315,7 +315,7 @@ def calc_density(df_nodes, df_edges, target_attribute):
     df_densities['density'] = df_densities.apply(lambda row: _get_density(df_nodes, row, target_attribute), axis=1)
 
     df_densities = df_densities[['sender_group','recipient_group','density']]
-    df_densities['density'] = round(df_densities['density'],2)
+    df_densities['density'] = round(df_densities['density'],3)
 
     return df_densities
 

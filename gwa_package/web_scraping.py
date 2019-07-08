@@ -14,7 +14,7 @@ def get_glassdoor_ratings():
 
     #Overall Rating
     temp_url = base_url + '.htm'
-    response = requests.get(temp_url, headers=headers)
+    response = requests.get(temp_url, headers=headers, verify=False)
     soup = BeautifulSoup(response.text, 'html.parser')
     #Global Values
     country = 'Experian Global'
@@ -40,7 +40,7 @@ def get_glassdoor_ratings():
     keep_looping = True
     while keep_looping:
         temp_url = base_url + '-EI_IE42406.0,8_IL.9,23_IN' + str(i) + '.htm'
-        response = requests.get(temp_url, headers=headers)
+        response = requests.get(temp_url, headers=headers, verify=False)
         soup = BeautifulSoup(response.text, 'html.parser')
 
         country = soup.find(

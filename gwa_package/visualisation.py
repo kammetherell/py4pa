@@ -17,7 +17,14 @@ def gen_expn_colors():
         "#406eb3", # Light Blue
         "#982881", # Maroon
         "#ba2f7d", # Pink
-        "#575756"  # Grey
+        "#575756", # Grey
+        # Light shaded versions
+        '#7d91bb',
+        '#a17dae',
+        '#8ca8d1',
+        '#c17eb3',
+        '#d682b1',
+        '#9a9a9a',
         ]
 
     return expn_colours
@@ -27,7 +34,7 @@ def gen_gradient_cmap(start, end, steps=50):
 
     Parameters
     ----------
-    start: tuple 
+    start: tuple
         rgb color
     end: tuple
         rgb color
