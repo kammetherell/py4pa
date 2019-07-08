@@ -9,6 +9,11 @@ git clone https://github.com/kamdickens/wfa.git
 pip install -e ./wfa
 ```
 
+If you need to bypass SSL verification on your machine (if you are behind a proxy for example), you can use the following install command:
+```
+pip install -e --trusted-host pypi.org --trusted-host files.pythonhosted.org ./wfa
+```
+
 Import the package into your Python script:
 ```
 import gwa_package as gwa
