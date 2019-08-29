@@ -23,7 +23,6 @@ setup(name='gwa_package',
         'networkx',
         'requests',
         'bs4',
-        'base64',
 
     ],
     zip_safe=False)
