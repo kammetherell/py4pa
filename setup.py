@@ -22,6 +22,8 @@ setup(name='gwa_package',
         'datetime',
         'networkx',
         'requests',
-        'bs4'
+        'bs4',
+        'base64',
+
     ],
     zip_safe=False)
