@@ -23,6 +23,7 @@ setup(name='gwa_package',
         'networkx',
         'requests',
         'bs4',
+        'urllib3',
 
     ],
     zip_safe=False)

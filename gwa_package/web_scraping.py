@@ -4,7 +4,8 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import base64
 import os
-
+import urllib3
+urllib3.disable_warnings()
 
 def get_glassdoor_ratings():
     base_url = 'https://www.glassdoor.co.uk/Reviews/Experian-Reviews-E42406'
@@ -13,6 +14,7 @@ def get_glassdoor_ratings():
     headers = {
         'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
     }
+    urllib3.disable_warnings()
 
     #Overall Rating
     temp_url = base_url + '.htm'
@@ -41,41 +43,43 @@ def get_glassdoor_ratings():
     i=1
     keep_looping = True
     while keep_looping:
-        temp_url = base_url + '-EI_IE42406.0,8_IL.9,23_IN' + str(i) + '.htm'
-        response = requests.get(temp_url, headers=headers, verify=False)
-        soup = BeautifulSoup(response.text, 'html.parser')
+        try:
+            temp_url = base_url + '-EI_IE42406.0,8_IL.9,23_IN' + str(i) + '.htm'
+            response = requests.get(temp_url, headers=headers, verify=False)
+            soup = BeautifulSoup(response.text, 'html.parser')
 
-        country = soup.find(
-            'div',
-            attrs={'class': 'eiReviews__EIReviewsPageContainerStyles__EIReviewsPageContainer'}
-        ).h1.text[9:-8]
-        rating = soup.find(
-            'div',
-            attrs={'class': 'common__EIReviewsRatingsStyles__ratingNum'}
-        )
-        num_reviews = soup.find(
-            'div',
-            attrs={'class': 'common__EIReviewSortBarStyles__sortsHeader'}
-        )
+            country = soup.find(
+                'div',
+                attrs={'class': 'eiReviews__EIReviewsPageContainerStyles__EIReviewsPageContainer'}
+            ).h1.text[9:-8]
+            rating = soup.find(
+                'div',
+                attrs={'class': 'common__EIReviewsRatingsStyles__ratingNum'}
+            )
+            num_reviews = soup.find(
+                'div',
+                attrs={'class': 'common__EIReviewSortBarStyles__sortsHeader'}
+            )
 
-        if country == '':
+            if len(country) > 0:
+                if num_reviews is not None:
+                    temp_dict = {
+                        'date': today,
+                        'country': country,
+                        'num_reviews': int(num_reviews.h2.span.strong.text),
+                        'rating': float(rating.text)
+                    }
+
+                    reviews.append(temp_dict)
+            else:
+                keep_looping = False
+
+            i+=1
+            continue
+        except Exception as e:
             keep_looping = False
             i+=1
             continue
-
-        if num_reviews is not None:
-            print(i, country)
-            temp_dict = {
-                'date': today,
-                'country': country,
-                'num_reviews': int(num_reviews.h2.span.strong.text),
-                'rating': float(rating.text)
-            }
-
-            reviews.append(temp_dict)
-
-        i+=1
-        continue
 
     return pd.DataFrame(reviews)
 
@@ -120,6 +124,7 @@ def get_data_connection(data_connector_id, user, pword, api_key, company,fName=N
         'apikey': api_key,
         'a':'b'
     }
+    urllib3.disable_warnings()
 
     authorization = "Basic {}==".format(base64.b64encode(bytes("{}:{}".format(user,pword),"utf-8")).decode("utf-8"))
     header = {"Authorization":authorization}
