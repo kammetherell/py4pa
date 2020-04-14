@@ -24,6 +24,6 @@ setup(name='gwa_package',
         'requests',
         'bs4',
         'urllib3',
-
+        'fake-useragent'
     ],
     zip_safe=False)

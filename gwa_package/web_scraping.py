@@ -6,13 +6,37 @@ import base64
 import os
 import urllib3
 urllib3.disable_warnings()
+from fake_useragent import UserAgent
+
+def get_random_useragent(browser=None):
+    '''Function to generate a random user agent for web scraping
+
+    Parameters
+    ----------
+    browser: String
+        Valid values are: 'ie', 'opera', 'chrome', 'firefox', 'safari'
+
+    Returns
+    ----------
+    String of valid User Agent
+
+    '''
+
+    ua = UserAgent()
+
+    useragent = ua.random
+
+    if browser is not None:
+        useragent = ua[browser]
+
+    return useragent
 
 def get_glassdoor_ratings():
     base_url = 'https://www.glassdoor.co.uk/Reviews/Experian-Reviews-E42406'
     reviews = []
     today = datetime.today().strftime('%Y-%m-%d')
     headers = {
-        'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
+        'user-agent': get_random_useragent()
     }
     urllib3.disable_warnings()
 
