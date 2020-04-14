@@ -109,7 +109,7 @@ def get_glassdoor_ratings():
 
 
 
-def get_data_connection(data_connector_id, user, pword, api_key, company,fName=None):
+def get_visier_data_connection(data_connector_id, user, pword, api_key, company,fName=None):
     """Function to make API call to Visier Data Connectors
 
     Parameters
