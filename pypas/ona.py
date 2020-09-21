@@ -122,12 +122,10 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
     print('Starting: ', str(start.hour).zfill(2) + ':'+ str(start.minute).zfill(2))
 
     cols_to_load = [
-        'message_id',
         'SenderAddress',
         'RecipientAddress',
         'Received',
-        'Size',
-        'Status'
+        'Size'
     ]
 
     if include_subject:
