@@ -13,7 +13,7 @@ def clean_email_data(dir, files='all', include_subject=False, engine='c', encodi
 
     Parameters
     ----------
-    dir: String
+    dir: String ()
         Path to the root directory containing the data files to process
 
     file: List or 'all' (optional)
