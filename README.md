@@ -55,3 +55,4 @@ import pypas
 - `pypas.misc.upgradeAllPackages()`
 - `pypas.misc.installPackage(package)`
 - `pypas.misc.getDateTimeStamp(time=True)`
+- `pypas.misc.continuous_logging(msg)`
