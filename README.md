@@ -11,6 +11,7 @@ pip install -e ./pypas
 
 If you need to bypass SSL verification on your machine (if you are behind a proxy for example), you can use the following install command:
 ```
+git -c http.sslVerify=false clone https://github.com/kamdickens/pypas.git
 pip install -e ./pypas --trusted-host pypi.org --trusted-host files.pythonhosted.org
 ```
 
