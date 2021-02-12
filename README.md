@@ -5,7 +5,7 @@
 Download and install the package on your machine:
 ```
 cd <<working directory>>
-git clone https://github.com/kamdickens/pypas.git
+git clone https://github.com/kammetherell/pypas.git
 pip install -e ./pypas
 ```
 
