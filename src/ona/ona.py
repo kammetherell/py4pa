@@ -201,7 +201,7 @@ def generate_node_edge_lists(email_data, demographic_data, demographic_key, outp
 
     now = datetime.datetime.now()
     print('Node and Edge list preparation complete: ', str(now.hour).zfill(2) + ':'+ str(now.minute).zfill(2))
-    print('Node List: ', nodelist_fName)
+    print('Node List: ', nodeList_fName)
     print('Edge List: ', edgelist_fName)
 
     return nodeList_fPath, edgeList_fPath

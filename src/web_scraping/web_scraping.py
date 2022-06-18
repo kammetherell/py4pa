@@ -31,8 +31,8 @@ def get_random_useragent(browser=None):
 
     return useragent
 
-def get_glassdoor_ratings():
-    base_url = 'https://www.glassdoor.co.uk/Reviews/Experian-Reviews-E42406'
+def get_glassdoor_ratings(glassdoor_id):
+    base_url = f'https://www.glassdoor.co.uk/Reviews/{glassdoor_id}'
     reviews = []
     today = datetime.today().strftime('%Y-%m-%d')
     headers = {
