@@ -10,7 +10,9 @@ jobs:
     name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@release
+    - uses: actions/checkout@master
+      with:
+        ref: release
     - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:
