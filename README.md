@@ -4,20 +4,19 @@
 
 Download and install the package on your machine:
 ```
-cd <<working directory>>
-git clone https://github.com/kammetherell/py4pa.git
-pip install -e ./py4pa
+pip install py4pa
 ```
 
 If you need to bypass SSL verification on your machine (if you are behind a proxy for example), you can use the following install command:
 ```
-git -c http.sslVerify=false clone https://github.com/kamdickens/py4pa.git
-pip install -e ./py4pa --trusted-host pypi.org --trusted-host files.pythonhosted.org
+pip install py4pa --trusted-host pypi.org --trusted-host files.pythonhosted.org
 ```
 
 Import the package into your Python script:
 ```
 import py4pa
+# or
+from py4pa import [arm]
 ```
 
 ## Usage
@@ -34,10 +33,10 @@ import py4pa
 
 - `py4pa.arm.concat_fields(df, fields)`
 
-### `py4pa.visualisation`
+### `py4pa.vis`
 
-- `py4pa.visualisation.gen_expn_colors()`
-- `py4pa.visualisation.gen_gradient_cmap(start, end, steps=50)`
+- `py4pa.vis.gen_expn_colors()`
+- `py4pa.vis.gen_gradient_cmap(start, end, steps=50)`
 
 ### `py4pa.nlp`
 
@@ -45,10 +44,10 @@ import py4pa
 
 - `py4pa.email_helper.send_plain_text_email(server, sender, recip, subject, body)`
 
-### `py4pa.web_scraping`
+### `py4pa.http`
 
-- `py4pa.web_scraping.get_random_useragent(browser=None):`
-- `py4pa.web_scraping.get_visier_data_connection(data_connector_id, user, pword, api_key, company,fName=None)`
+- `py4pa.http.get_random_useragent(browser=None):`
+- `py4pa.http.Visier`
 
 ### `py4pa.misc`
 
