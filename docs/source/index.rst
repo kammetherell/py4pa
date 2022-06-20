@@ -8,7 +8,9 @@ Welcome to py4pa's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   
+   usage/installation
+   usage/quickstart
 
 
 
