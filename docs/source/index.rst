@@ -7,7 +7,9 @@ Welcome to py4pa's documentation!
 =================================
 
 Python for People Analytics is designed as a series of modules that I have used on 
-an almost daily basis across the various People Analytics projects I havve worked on.
+an almost daily basis across the various People Analytics projects I have worked on.
+
+Find this package on PyPI: https://pypi.org/project/py4pa/
 
 Installation
 ------------
