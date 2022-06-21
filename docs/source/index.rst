@@ -20,9 +20,10 @@ Navigation
 ----------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    
    usage/quickstart
+   modules
 
 .. Features
 .. --------
