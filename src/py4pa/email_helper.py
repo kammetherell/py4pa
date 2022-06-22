@@ -22,12 +22,23 @@ mimetypes = {
 }
 
 class Email:
-    server = None
-    server_addr = ''
-    server_port = None
-    html_template = ''
-    plain_template = ''
-    default_attachments = None
+    """Helper class to manage creating email body & headers
+
+    This class does not currently include any authenticaion onto the email server
+
+    Parameters
+    ----------
+    sender : str
+        The email address you wish to appear in the 'From' field on the email.
+        Can be just plain email: 'example@gmail.com', or alternatively in the format:
+        'Example <example@gmail.com>'
+    
+    server_addr : str
+        The url of the email server you are connecting to, e.g. relay.abc.local
+
+    server_port : int
+        The port through which the connection to the email server is made
+    """
 
     def __init__(self, sender, server_addr, server_port):
         self.sender = sender
@@ -96,7 +107,7 @@ class Email:
         msg.attach(MIMEText(html, 'html'))
         msg.attach(MIMEText(plain, 'plain'))
 
-        #TODO add attachment handling
+        #TODO add default attachment handling
         for idx, attachment in enumerate(attachments):
             mime = self._process_attachment(attachment, idx+1)
             msg.attach(mime)

@@ -9,7 +9,28 @@ urllib3.disable_warnings()
 from fake_useragent import UserAgent
 
 class Visier:
+    """Class to manage ingestion of Visier data connectors
+
+    See Visier user documentation for more information (you will need to log in to the service portal first): 
+    https://my.visier.com/csm?id=kb_article_view&sysparm_article=KB0014851
+
+    Parameters
+    ----------
+    company : str
+        The company name used to connect to the Visier application e.g. [company].visier.com
+    
+    api_key : str
+        The API key generated in the admin panel of the Visier application
+
+    user : str
+        The username used to connect to the data_connectors (typically email). This user must 
+        have access to all data connectors that you intend to connect to with this Class
+
+    pword : str
+        The associated password for :code:`user`
+    """
     def __init__(self, company, api_key, user, pword):
+
         self.company = company
         self.api_key = api_key
 
@@ -29,8 +50,9 @@ class Visier:
             Full file path, including csv extension that you want to give your file if you want to save it. If not declared, no file will be saved.
 
         Returns
-        ----------
-        Pandas df of returned data
+        -------
+        df: Pandas Dataframe
+            Pandas Dataframe of returned data from the connector
 
         """
         urllib3.disable_warnings()
