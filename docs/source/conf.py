@@ -10,9 +10,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../../src/'))
 
 
 # -- Project information -----------------------------------------------------
@@ -52,3 +52,24 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+#Alabaster theme html options. See https://alabaster.readthedocs.io/en/latest/customization.html#theme-options
+
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+        # 'donate.html',
+    ]
+}
+
+html_theme_options  = {
+    'description': 'Helping make Python more accessible for People Analytics professionals',
+    'github_button':True,
+    'github_repo':'py4pa',
+    'github_user':'kammetherell',
+    'font_family': 'Roboto',
+    'logo': 'py4pa_logo.png',
+}

@@ -1,3 +1,19 @@
+py4pa.email_helper
+------------------
+
+.. automodule:: py4pa.email_helper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+py4pa.http_helper
+-----------------
+
+.. automodule:: py4pa.http_helper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 py4pa.arm
 ----------------
 
@@ -6,21 +22,6 @@ py4pa.arm
    :undoc-members:
    :show-inheritance:
 
-py4pa.email
-------------------
-
-.. automodule:: py4pa.email
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-py4pa.http
------------------
-
-.. automodule:: py4pa.http
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 py4pa.misc
 -----------------

@@ -212,10 +212,10 @@ def generate_nx_digraph(node_list, edge_list):
 
     Parameters
     ----------
-    node_list: String or Pandas Dataframe
+    node_list : String or Pandas Dataframe
         Path to file containing Node list, or Dataframe of Node List
 
-    edge_list: String  or Pandas Dataframe
+    edge_list : String  or Pandas Dataframe
         Path to file containing Edge list
 
     Returns
@@ -288,13 +288,13 @@ def calc_density(df_nodes, df_edges, target_attribute):
 
     Parameters
     ----------
-    df_nodes: Pandas DataFrame
+    df_nodes : Pandas DataFrame
         Dataframe containing the Node list
 
-    df_edges: Pandas DataFrame
+    df_edges : Pandas DataFrame
         DataFrame containing the edge list
 
-    target_attribute: String
+    target_attribute : String
         Name of attribute in Node List that we want to calculate the densities between
 
     Returns
@@ -345,22 +345,22 @@ def calc_modularity(df_nodes, df_edges, target_attribute, weighted=False, direct
 
     Parameters
     ----------
-    df_nodes: Pandas DataFrame
+    df_nodes : Pandas DataFrame
         Dataframe containing the Node list
 
-    df_edges: Pandas DataFrame
+    df_edges : Pandas DataFrame
         DataFrame containing the edge list
 
-    target_attribute: String
+    target_attribute : String
         Name of attribute in Node List that we want to calculate the
         modularities between
 
-    weighted: Boolean default False
+    weighted : Boolean default False
         If set to True, the modularities will be weighted by the amount of
         email traffic.
         If False, will just calculate on basis on presence of a connection
 
-    direction: String default = 'outbound'
+    direction : String default = 'outbound'
         'outbound' or 'inbound' determines the direction of the email traffic
         to be considered
 
