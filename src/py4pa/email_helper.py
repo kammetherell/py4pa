@@ -1,4 +1,3 @@
-from distutils import extension
 import os 
 import smtplib
 from datetime import datetime as datetime
