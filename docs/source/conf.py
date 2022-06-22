@@ -22,7 +22,7 @@ copyright = '2022, Kevin Metherell'
 author = 'Kevin Metherell'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = '0.1.4'
 
 
 # -- General configuration ---------------------------------------------------
