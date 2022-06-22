@@ -21,6 +21,7 @@ sphinx:
 
 # Optionally declare the Python requirements required to build your docs
 python:
-   install:
+  install:
     - method: setuptools
-      path: src/py4pa
+      path: .
+  system_packages: true
