@@ -1,3 +1,11 @@
+py4pa.logging
+------------------
+
+.. automodule:: py4pa.logging
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 py4pa.email_helper
 ------------------
 

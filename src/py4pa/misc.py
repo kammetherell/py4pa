@@ -73,19 +73,4 @@ def getDateTimeStamp(time=True):
         stamp = stamp + "_" + str(now.hour).zfill(2) + str(now.minute).zfill(2)
     return stamp
 
-def continuous_logging(msg):
-    """Function to print out messages that over-write each other as a new message is sent
 
-    Parameters
-    ----------
-    msg: String
-        the message to be printed to the console
-
-    Returns
-    -------
-    None
-    """
-
-    print(f'\r{msg}\r', end='', flush=True)
-
-    return None
