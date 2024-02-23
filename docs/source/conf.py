@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../../src/'))
 # -- Project information -----------------------------------------------------
 
 project = 'py4pa'
-copyright = '2022, Kevin Metherell'
+copyright = '2024, Kevin Metherell'
 author = 'Kevin Metherell'
 
 # The full version, including alpha/beta/rc tags
