@@ -62,3 +62,11 @@ py4pa.vis
    :members:
    :undoc-members:
    :show-inheritance:
+
+py4pa.visier
+----------------
+
+.. automodule:: py4pa.visier
+   :members:
+   :undoc-members:
+   :show-inheritance:
