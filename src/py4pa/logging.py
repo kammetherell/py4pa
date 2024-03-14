@@ -1,4 +1,7 @@
 from datetime import datetime as datetime
+import logging
+import os
+import sys
 
 class Log_File:
     """Python class to enable logging of key events to a file of your choosing, 
@@ -7,13 +10,21 @@ class Log_File:
     Parameters
     ----------
     directory : str
-        The file location where you want the output file saved, 
+        The file location where you want the log file saved, 
         excluding the file name
 
     fName : str (optional)
         The filename, including extension that you want to use as your output.
         If this isn't specified, the file will be called 'progress_log - YYYY-MM-DD HH:MM:SS.txt', 
         where the date & time stamp will be the time when the log is first initiated.
+    
+    log_level : str (optional)
+        Defaults to 'INFO'. Valid options are NOTSET, DEBUG, INFO, WARN, ERROR, CRITICAL
+    
+    log_fmt : str (optional)
+        See https://docs.python.org/3/library/logging.html#logging.LogRecord for definitions 
+        of attributes. Defaults to '%(asctime)s: %(levelname)s %(message)s' e.g. 
+        '2024-03-14 10:56:54,329: INFO test info message'
 
     print_to_console : bool (optional)
         Defaults to True. If set to true, will print messages to both the log file, 
@@ -21,71 +32,66 @@ class Log_File:
     """
 
 
-    def __init__(self, directory, fName=None, print_to_console=True):
+    def __init__(self, 
+                 directory, 
+                 fName=None, 
+                 log_level = 'INFO', 
+                 log_fmt='%(asctime)s: %(levelname)s %(message)s',
+                 print_to_console=False):
 
-        self.run_date_time = datetime.now().strftime('%Y-%m-%d T%H:%M:%S')
-        self.fName = f'progress_log - {self.run_date_time}.txt'
+        self.run_date_time = datetime.now().strftime('%Y-%m-%d T%H-%M-%S')
+        self.fName = f'progress_log-{self.run_date_time}.log'
 
         if fName is not None:
             self.fName = fName
+        self.directory = directory
+        self.fPath = r'{0}/{1}'.format(directory, self.fName)
+        print(self.fPath)
 
-        self.fPath = f'{directory}/{self.fName}'
-
+        self.log_level = logging.getLevelName(log_level)
+        self.log_fmt = log_fmt
         self.print_to_console = print_to_console
 
-    def add_section(self, section_title):
-        """Adds a section heading to the log output
-
-        Parameters
-        ----------
-        section_title : str
-            The title you wish to add to the log output
+        if not os.path.exists(self.directory):
+            os.makedirs(self.directory)
         
-        """
-        with open(self.fPath, 'a') as f:
-            f.write('##############################' + '\n')
-            f.write(section_title.center(30))
-            f.write('##############################' + '\n')
+        # if not os.path.exists(self.fPath):
+        #     with open(self.fPath, 'w'): pass
 
+        self.__create_logger()
+
+    def __create_logger(self):
+
+        #Set Up Logger and level
+        log = logging.getLogger()
+        log.setLevel(self.log_level)
+
+        #Set log message format
+        format=logging.Formatter(self.log_fmt)
+
+        #Set Up log file handler
+        file_handler = logging.FileHandler(self.fPath)
+        file_handler.setLevel(self.log_level)
+        file_handler.setFormatter(format)
+        log.addHandler(file_handler)
+
+        #Set up Print to console if set in Class
         if self.print_to_console:
-            print(f'##############################')
-            print(section_title.center(30))
-            print(f'##############################')
+            console_handler = logging.StreamHandler(sys.stdout)
+            console_handler.setLevel(self.log_level)
+            console_handler.setFormatter(format)
+            log.addHandler(console_handler)
 
-
-    def log(self, status):
-        """Adds a time-stamped status update to the log file & console
-
-        Parameters
-        ----------
-        
-        status : str
-            The text of the status update you wish to add. The method will add 
-            the date and time stamp automatically.
-        
-        """
-        now = datetime.now().strftime('%Y-%m-%d T%H:%M:%S - ')
-        
-        with open(self.fPath, 'a') as f:
-                f.write(now + status + '\n')
-
-        if self.print_to_console:
-            print(f'{now}{status}')
-
-
-def continuous_logging(msg):
-    """Function to print out messages that over-write each other as a new message is sent
-
-    Parameters
-    ----------
-    msg: String
-        the message to be printed to the console
-
-    Returns
-    -------
-    None
-    """
-
-    print(f'\r{msg}\r', end='', flush=True)
-
-    return None
+        print('Logger Created')
+        self.logger = log
+    
+    def debug(self, msg):
+        self.logger.debug(msg)
+    def info(self, msg):
+        self.logger.info(msg)
+    def warning(self, msg):
+        self.logger.warning(msg)
+    def error(self, msg):
+        self.logger.error(msg)
+    def critical(self, msg):
+        self.logger.critical(msg)

@@ -22,10 +22,10 @@ py4pa.http_helper
    :undoc-members:
    :show-inheritance:
 
-py4pa.arm
+py4pa.data_manipulation
 ----------------
 
-.. automodule:: py4pa.arm
+.. automodule:: py4pa.data_manipulation
    :members:
    :undoc-members:
    :show-inheritance:
