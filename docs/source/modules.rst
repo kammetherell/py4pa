@@ -6,4 +6,4 @@ py4pa Modules
 
    log
    ona
-   py4pa
+   .. py4pa

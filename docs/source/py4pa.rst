@@ -22,7 +22,6 @@ py4pa.data_manipulation
    :undoc-members:
    :show-inheritance:
 
-
 py4pa.misc
 -----------------
 
