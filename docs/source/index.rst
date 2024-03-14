@@ -29,6 +29,7 @@ Navigation
    nlp
    log
    email
+   sftp
    data manipulation
    visualisation
    visier

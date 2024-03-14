@@ -12,7 +12,8 @@ def gen_gradient_cmap(start, end, steps=50):
 
     Returns
     ----------
-    list of colors for use in saeborn color maps
+    cmap: List
+        list of colors for use in saeborn color maps
 
     """
 
