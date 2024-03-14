@@ -23,17 +23,16 @@ class SFTP:
     """
 
     # Datetime is used to append to folder names
-    TodayDate = datetime.now()
-
-    date_time = TodayDate.strftime('%m-%d-%y_%H-%M-%S')
-
-    def __init__(self, host, user, pword, port, date_time=date_time):
-
+    def __init__(self, host, user, pword, port, date_time=None):
         self.host = host
         self.user = user
         self.pword = pword
         self.port = port
-        self.date_time = date_time
+        if date_time is not None:
+            self.date_time = date_time
+        else:
+            now = datetime.now()
+            self.date_time = now.strftime('%m-%d-%y_%H-%M-%S')
 
     def download_file(self, 
                      master_folder, 
