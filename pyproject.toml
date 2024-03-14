@@ -19,6 +19,10 @@ dependencies = [
     "fake-useragent",]
 requires-python = ">= 3.6"
 readme = "README.md"
+classifiers =[
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    ]
 
 [project.urls]
 Homepage = "https://py4pa.readthedocs.io/en/latest/"
@@ -26,7 +30,4 @@ Documentation = "https://py4pa.readthedocs.io/en/latest/"
 Repository = "https://github.com/kammetherell/py4pa/"
 Issues = "https://github.com/kammetherell/py4pa/issues"
 
-classifiers =[
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    ]
+
