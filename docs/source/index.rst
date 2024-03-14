@@ -25,6 +25,8 @@ Navigation
    :maxdepth: 3
    
    usage/quickstart
+   log
+   ona
    modules
 
 .. Features

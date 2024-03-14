@@ -1,11 +1,3 @@
-py4pa.log
-------------------
-
-.. automodule:: py4pa.log
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 py4pa.email_helper
 ------------------
 
@@ -43,14 +35,6 @@ py4pa.nlp
 ----------------
 
 .. automodule:: py4pa.nlp
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-py4pa.ona
-----------------
-
-.. automodule:: py4pa.ona
    :members:
    :undoc-members:
    :show-inheritance:
