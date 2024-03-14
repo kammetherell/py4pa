@@ -12,6 +12,7 @@
 #
 import os
 import sys
+from importlib.metadata import version as get_version
 sys.path.insert(0, os.path.abspath('../../src/'))
 
 
@@ -22,7 +23,7 @@ copyright = '2024, Kevin Metherell'
 author = 'Kevin Metherell'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.6'
+release = get_version('py4pa')
 
 
 # -- General configuration ---------------------------------------------------
