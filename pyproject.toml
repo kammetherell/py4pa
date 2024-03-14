@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "py4pa"
-version = "0.1.6"
+version = "0.1.7"
 license = {file = "LICENSE.txt"}
 authors = [{name="Kevin Metherell",email = "kevindickens@gmail.com" }]
 description = "Package of various helper modules to support various People Analytics projects"
