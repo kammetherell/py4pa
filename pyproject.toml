@@ -3,7 +3,7 @@ requires = ['setuptools>=42']
 build-backend = 'setuptools.build_meta'
 
 [project]
-name = py4pa
+name = "py4pa"
 version = 0.1.6
 license = {file = "LICENSE.txt"}
 authors = [{name="Kevin Metherell",email = "kevindickens@gmail.com" }]
