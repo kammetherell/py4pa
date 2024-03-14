@@ -74,4 +74,5 @@ html_theme_options  = {
     'github_user':'kammetherell',
     'font_family': 'Roboto',
     'logo': 'py4pa_logo.png',
+    'fixed_sidebar': True,
 }
