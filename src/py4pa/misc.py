@@ -32,28 +32,6 @@ def csv_to_utf8(file):
 
     return fName
 
-def upgradeAllPackages():
-    packages = [dist.project_name for dist in pkg_resources.working_set]
-
-    packages_to_ignore = [
-        'pycurl',
-        'pywin32'
-    ]
-
-    for p in packages_to_ignore:
-        if (p in packages):
-            packages.remove(p)
-            print(f'Skipping {p}')
-
-    call("pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org --upgrade " + ' '.join(packages), shell=True)
-
-def installPackage(package):
-    try:
-        call(f"pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org {package}", shell=True)
-        print(f'{package} successfully installed')
-    except Exception as e:
-        print("Error - {}".format(e))
-
 def getDateTimeStamp(time=True):
     """Function to generate a Date/Time stamp for the current time
 
