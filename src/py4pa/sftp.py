@@ -23,17 +23,16 @@ class SFTP:
     """
 
     # Datetime is used to append to folder names
-    TodayDate = datetime.now()
-
-    date_time = TodayDate.strftime('%m-%d-%y_%H-%M-%S')
-
-    def __init__(self, host, user, pword, port, date_time=date_time):
-
+    def __init__(self, host, user, pword, port, date_time=None):
         self.host = host
         self.user = user
         self.pword = pword
         self.port = port
-        self.date_time = date_time
+        if date_time is not None:
+            self.date_time = date_time
+        else:
+            now = datetime.now()
+            self.date_time = now.strftime('%m-%d-%y_%H-%M-%S')
 
     def download_file(self, 
                      master_folder, 
@@ -44,9 +43,10 @@ class SFTP:
                      return_folder_path=False, 
                      delete_original=True, 
                      use_date_stamp=True):
-        """Collects file from STS account and saves within folder location
+        """Collects file from STS account and saves within folder location.Package
+        can also currently used to create folders without interaction with SFTP site.
 
-        Package can also currently used to create folders without interaction with SFTP site
+        Parameters
         ----------
         master_folder: String ()
             Path to the root directory for the process
@@ -107,6 +107,7 @@ class SFTP:
     def upload_file(self, local_file_path, remote_file_path):
         """Uploads file to SFTP account
 
+        Parameters
         ----------
         local_file_path: String ()
             Path to where the file is saved locally.
@@ -138,6 +139,7 @@ class SFTP:
     def list_files(self, remote_dir="/"):
         """Lists file directory within SFTP account
 
+        Parameters
         ----------
         remote_dir: String () default = '/'
             This is the folder name that you would like to see a directory for,
@@ -167,6 +169,7 @@ class SFTP:
     def __file_collect(self, remote_file_path, local_file_path):
         """Function to collect files from SFTP account
 
+        Parameters
         ----------
         remote_file_path: String ()
             Path to where the file is stored in the SFTP portal.
@@ -202,6 +205,7 @@ class SFTP:
     def __file_remove(self, remote_file_path):
         """Function to remove files from SFTP account
 
+        Parameters
         ----------
         remote_file_path: String ()
             Path to where the file is stored in the SFTP portal.

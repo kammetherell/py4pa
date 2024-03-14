@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = "py4pa"
-version = "0.1.10"
+version = "0.1.11"
 license = {file = "LICENSE.txt"}
 authors = [{name="Kevin Metherell",email = "kevindickens@gmail.com" }]
 description = "Package of various helper modules to support various People Analytics projects"
@@ -16,7 +16,8 @@ dependencies = [
     "requests",
     "bs4",
     "urllib3",
-    "fake-useragent",]
+    "fake-useragent",
+    "pysftp"]
 requires-python = ">= 3.6"
 readme = "README.md"
 classifiers =[
