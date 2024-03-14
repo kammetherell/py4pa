@@ -27,6 +27,7 @@ Navigation
    usage/quickstart
    log
    ona
+   modules
 
 .. Features
 .. --------
