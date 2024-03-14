@@ -30,7 +30,7 @@ Navigation
    log
    email
    sftp
-   data manipulation
+   data_manipulation
    visualisation
    visier
    http

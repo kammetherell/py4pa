@@ -44,9 +44,10 @@ class SFTP:
                      return_folder_path=False, 
                      delete_original=True, 
                      use_date_stamp=True):
-        """Collects file from STS account and saves within folder location
+        """Collects file from STS account and saves within folder location.Package
+        can also currently used to create folders without interaction with SFTP site.
 
-        Package can also currently used to create folders without interaction with SFTP site
+        Parameters
         ----------
         master_folder: String ()
             Path to the root directory for the process
