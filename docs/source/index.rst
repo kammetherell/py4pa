@@ -25,9 +25,16 @@ Navigation
    :maxdepth: 3
    
    usage/quickstart
-   log
    ona
-   modules
+   nlp
+   log
+   email
+   data manipulation
+   visualisation
+   visier
+   http
+   misc
+
 
 .. Features
 .. --------
