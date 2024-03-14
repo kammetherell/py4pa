@@ -1,7 +1,7 @@
 # Python for People Analytics
 
 ## Documentation
-https://py4pa.readthedocs.io/en/latest/py4pa.html
+https://py4pa.readthedocs.io/en/latest/index.html
 
 
 ## Installation

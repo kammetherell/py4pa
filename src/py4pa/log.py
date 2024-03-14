@@ -81,8 +81,7 @@ class Log_File:
             console_handler.setLevel(self.log_level)
             console_handler.setFormatter(format)
             log.addHandler(console_handler)
-
-        print('Logger Created')
+            
         self.logger = log
     
     def debug(self, msg):
