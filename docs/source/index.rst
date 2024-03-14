@@ -35,7 +35,6 @@ Navigation
    http
    misc
 
-
 .. Features
 .. --------
 
