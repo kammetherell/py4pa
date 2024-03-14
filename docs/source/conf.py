@@ -24,6 +24,7 @@ author = 'Kevin Metherell'
 
 # The full version, including alpha/beta/rc tags
 release = get_version('py4pa')
+version = get_version('py4pa')
 
 
 # -- General configuration ---------------------------------------------------

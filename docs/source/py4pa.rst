@@ -1,7 +1,7 @@
-py4pa.logging
+py4pa.log
 ------------------
 
-.. automodule:: py4pa.logging
+.. automodule:: py4pa.log
    :members:
    :undoc-members:
    :show-inheritance:
@@ -55,10 +55,10 @@ py4pa.ona
    :undoc-members:
    :show-inheritance:
 
-py4pa.vis
+py4pa.visualisation
 ----------------
 
-.. automodule:: py4pa.vis
+.. automodule:: py4pa.visualisation
    :members:
    :undoc-members:
    :show-inheritance:
