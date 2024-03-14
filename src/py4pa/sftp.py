@@ -108,6 +108,7 @@ class SFTP:
     def upload_file(self, local_file_path, remote_file_path):
         """Uploads file to SFTP account
 
+        Parameters
         ----------
         local_file_path: String ()
             Path to where the file is saved locally.
@@ -139,6 +140,7 @@ class SFTP:
     def list_files(self, remote_dir="/"):
         """Lists file directory within SFTP account
 
+        Parameters
         ----------
         remote_dir: String () default = '/'
             This is the folder name that you would like to see a directory for,
@@ -168,6 +170,7 @@ class SFTP:
     def __file_collect(self, remote_file_path, local_file_path):
         """Function to collect files from SFTP account
 
+        Parameters
         ----------
         remote_file_path: String ()
             Path to where the file is stored in the SFTP portal.
@@ -203,6 +206,7 @@ class SFTP:
     def __file_remove(self, remote_file_path):
         """Function to remove files from SFTP account
 
+        Parameters
         ----------
         remote_file_path: String ()
             Path to where the file is stored in the SFTP portal.
