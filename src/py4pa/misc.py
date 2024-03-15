@@ -2,6 +2,7 @@ import pandas as pd
 import pkg_resources
 from subprocess import call
 from datetime import datetime
+from fake_useragent import UserAgent
 
 def csv_to_utf8(file):
     """Converts a csv file to utf-8 encoding
@@ -32,7 +33,7 @@ def csv_to_utf8(file):
 
     return fName
 
-def getDateTimeStamp(time=True):
+def getNowDateTimeStr(time=True):
     """Function to generate a Date/Time stamp for the current time
 
     Parameters
@@ -51,4 +52,25 @@ def getDateTimeStamp(time=True):
         stamp = stamp + "_" + str(now.hour).zfill(2) + str(now.minute).zfill(2)
     return stamp
 
+def get_random_useragent(browser=None):
+    '''Function to generate a random user agent for web scraping
 
+    Parameters
+    ----------
+    browser: String
+        Valid values are: 'ie', 'opera', 'chrome', 'firefox', 'safari'
+
+    Returns
+    ----------
+    String of valid User Agent
+
+    '''
+
+    ua = UserAgent()
+
+    useragent = ua.random
+
+    if browser is not None:
+        useragent = ua[browser]
+
+    return useragent

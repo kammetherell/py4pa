@@ -1,18 +1,19 @@
-name: Publish Python 🐍 distributions 📦 to PyPI and TestPyPI
+name: Publish Python 🐍 distributions 📦 to Test PyPI
 
 on: 
   push:
     branches:
-      - release
+      - master
 
 jobs:
   build:
     name: Build distribution 📦
     runs-on: ubuntu-latest
+    environment: staging
     steps:
     - uses: actions/checkout@v4
       with:
-        ref: release
+        ref: master
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -31,16 +32,16 @@ jobs:
         name: python-package-distributions
         path: dist/
 
-  publish-to-pypi:
+  publish-to-test-pypi:
     name: >-
-      Publish Python 🐍 distribution 📦 to PyPI
+      Publish Python 🐍 distribution 📦 to Test PyPI
     #if: startsWith(github.ref, 'refs/tags/')  # only publish to PyPI on tag pushes
     needs:
     - build
     runs-on: ubuntu-latest
     environment:
-      name: pypi
-      url: https://pypi.org/p/py4pa  # Replace <package-name> with your PyPI project name
+      name: staging
+      url: https://test.pypi.org/p/py4pa  # Replace <package-name> with your PyPI project name
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
@@ -51,6 +52,8 @@ jobs:
           path: dist/
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
 
 
 

@@ -25,15 +25,14 @@ Navigation
    :maxdepth: 3
    
    usage/quickstart
+   log
+   sftp
+   email
+   visier
    ona
    nlp
-   log
-   email
-   sftp
    data_manipulation
    visualisation
-   visier
-   http
    misc
 
 .. Features
