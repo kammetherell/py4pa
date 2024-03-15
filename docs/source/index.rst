@@ -25,11 +25,11 @@ Navigation
    :maxdepth: 3
    
    usage/quickstart
+   log
+   sftp
    ona
    nlp
-   log
    email
-   sftp
    data_manipulation
    visualisation
    visier
