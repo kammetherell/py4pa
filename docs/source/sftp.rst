@@ -5,9 +5,9 @@ needed when dealing with file on an SFTP server.
 
 Usage
 -----
-You can use this module in a few ways::
+You can use this module in a few ways
 
-1. Import the whole py4pa package
+1. Import the whole py4pa package::
 
       import py4pa
 
@@ -20,7 +20,7 @@ You can use this module in a few ways::
 
       sftp.list_files()
 
-2. Import the module directly
+2. Import the module directly::
    
       from py4pa import SFTP
 
@@ -33,7 +33,7 @@ You can use this module in a few ways::
 
       sftp.list_files()
 
-Class/Function Documentation
+Documentation
 ----------------------------
 
 .. automodule:: py4pa.sftp
