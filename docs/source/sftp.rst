@@ -36,7 +36,7 @@ You can use this module in a few ways
 Documentation
 ----------------------------
 
-.. automodule:: py4pa.sftp
+.. automodule:: py4pa.SFTP
    :members:
    :undoc-members:
-   .. :show-inheritance:
+   :show-inheritance:
