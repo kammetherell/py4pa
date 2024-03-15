@@ -126,17 +126,18 @@ class VisierAPI:
 
             E.g. https://<<vanity_name>>.visier.com
         """
-    def __init__(self, uname, pword, apikey, vanity_name='experian', proxies=None):
+    def __init__(self, uname, pword, apikey, vanity_name, proxies=None, sslVerify=True):
         
         self.uname = uname
         self.pword = pword
         self.apikey = apikey
         self.baseurl = f'https://{vanity_name}.api.visier.io/v1'
         self.proxies = proxies
-        self._get_security_code()
+        self.sslVerify = sslVerify
+        self.__get_security_code()
     
 
-    def _get_security_code(self):
+    def __get_security_code(self):
         data = {
             'username': self.uname,
             'password': self.pword
@@ -145,7 +146,8 @@ class VisierAPI:
         resp = requests.post(
             f'{self.baseurl}/admin/visierSecureToken',
             data=data,
-            proxies=self.proxies
+            proxies=self.proxies,
+            verify=self.sslVerify
         )
 
         if resp.status_code==200:
@@ -197,7 +199,8 @@ class VisierAPI:
                 f'{self.baseurl}{api_path}',
                 headers=headers,
                 cookies=cookies,
-                proxies=self.proxies
+                proxies=self.proxies,
+                verify=self.sslVerify
                 )
 
         elif method=='post':
@@ -206,7 +209,8 @@ class VisierAPI:
                 headers=headers,
                 cookies=cookies,
                 data=data,
-                proxies=self.proxies)
+                proxies=self.proxies,
+                verify=self.sslVerify)
 
         if resp.ok:
             return resp

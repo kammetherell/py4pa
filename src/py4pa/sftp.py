@@ -19,7 +19,6 @@ class SFTP:
 
     port : int
         The port through which the connection to the SFTP server is made.
-        522 is used as the default port.
 
     date_time : str (optional)
         The Date/Time suffix you want appended to any folders this class 

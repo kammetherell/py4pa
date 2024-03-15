@@ -33,7 +33,6 @@ Navigation
    data_manipulation
    visualisation
    visier
-   http
    misc
 
 .. Features
