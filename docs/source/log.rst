@@ -1,5 +1,6 @@
 Log_File
-====
+========
+
 The Log_File enables you to set up logging to a file that is 
 saved for future access to persist the logs. Also enables the 
 ability to output the logs to the console (STDOUT) if you desire.

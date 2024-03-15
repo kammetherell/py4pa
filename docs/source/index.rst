@@ -27,12 +27,12 @@ Navigation
    usage/quickstart
    log
    sftp
+   email
+   visier
    ona
    nlp
-   email
    data_manipulation
    visualisation
-   visier
    misc
 
 .. Features
